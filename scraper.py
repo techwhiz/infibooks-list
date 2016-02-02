@@ -22,3 +22,19 @@
 # All that matters is that your final data is written to an SQLite database
 # called "data.sqlite" in the current working directory which has at least a table
 # called "data".
+import scraperwiki           
+import lxml.html
+import re
+import urlparse         
+
+url = "http://www.infibeam.com/best-selling-books"
+html = scraperwiki.scrape(url)
+authors =''
+tree = lxml.html.fromstring(html)
+
+#bk_titles=tree.xpath('//*[contains(@class,"carousel_list")]//*[contains(@class,"productlist_index")]//*[contains(@class,"product-img")]//img/@title')
+#bk_isbns=tree.xpath('//*[contains(@class,"carousel_list")]//*[contains(@class,"productlist_index")]//*[contains(@class,"product-img")]//img/@data-title')
+bk_urls=tree.xpath('//*[contains(@class,"carousel_list")]//*[contains(@class,"productlist_index")]//*[contains(@class,"product-img")]//a/@href')
+#print bk_isbns
+
+scraperwiki.sqlite.save(['url'],data=bk_urls)

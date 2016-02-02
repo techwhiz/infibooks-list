@@ -34,7 +34,8 @@ tree = lxml.html.fromstring(html)
 
 #bk_titles=tree.xpath('//*[contains(@class,"carousel_list")]//*[contains(@class,"productlist_index")]//*[contains(@class,"product-img")]//img/@title')
 #bk_isbns=tree.xpath('//*[contains(@class,"carousel_list")]//*[contains(@class,"productlist_index")]//*[contains(@class,"product-img")]//img/@data-title')
-bk_urls['url']=tree.xpath('//*[contains(@class,"carousel_list")]//*[contains(@class,"productlist_index")]//*[contains(@class,"product-img")]//a/@href')
+bk_urls=tree.xpath('//*[contains(@class,"carousel_list")]//*[contains(@class,"productlist_index")]//*[contains(@class,"product-img")]//a/@href')
 #print bk_isbns
 
-scraperwiki.sqlite.save(['url'],data=bk_urls)
+for bk_url in bk_urls:
+  scraperwiki.sqlite.save(['url'],data={'url':bk_url})
